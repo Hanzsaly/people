@@ -35,53 +35,65 @@ function AuthPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
-        <div className="auth-tabs">
-          <button
-            type="button"
-            className={mode === "login" ? "active" : ""}
-            onClick={() => setMode("login")}
-          >
-            Вход
-          </button>
-          <button
-            type="button"
-            className={mode === "register" ? "active" : ""}
-            onClick={() => setMode("register")}
-          >
-            Регистрация
-          </button>
+      <div className="auth-blob auth-blob--1" />
+      <div className="auth-blob auth-blob--2" />
+
+      <div className="auth-content">
+        <div className="auth-intro">
+          <span className="auth-logo">People</span>
+          <h1>Один эфир — любой язык</h1>
+          <p>
+            Синхронный перевод трансляций для бизнеса, голосовые комнаты и люди
+            по интересам — в одном месте.
+          </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <label>
-            Телефон
+        <div className="auth-card">
+          <div className="auth-tabs">
+            <button
+              type="button"
+              className={mode === "login" ? "active" : ""}
+              onClick={() => setMode("login")}
+            >
+              Вход
+            </button>
+            <button
+              type="button"
+              className={mode === "register" ? "active" : ""}
+              onClick={() => setMode("register")}
+            >
+              Регистрация
+            </button>
+          </div>
+
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="phone">Телефон</label>
             <input
+              id="phone"
               type="tel"
               placeholder="+77001234567"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
               required
             />
-          </label>
 
-          <label>
-            Пароль
+            <label htmlFor="password">Пароль</label>
             <input
+              id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               minLength={8}
               required
             />
-          </label>
 
-          {error && <p className="auth-error">{error}</p>}
+            {error && <p className="auth-error">{error}</p>}
 
-          <button type="submit" disabled={loading}>
-            {loading ? "Подождите..." : mode === "login" ? "Войти" : "Зарегистрироваться"}
-          </button>
-        </form>
+            <button type="submit" disabled={loading}>
+              {loading ? "Подождите..." : mode === "login" ? "Войти" : "Зарегистрироваться"}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
