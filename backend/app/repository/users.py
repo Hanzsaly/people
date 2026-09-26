@@ -22,6 +22,10 @@ class AbstractUserRepository(ABC):
         ...
 
     @abstractmethod
+    async def get_by_id(self, user_id: int) -> UserEntity | None:
+        ...
+
+    @abstractmethod
     async def add(self, phone: str, password_hash: str) -> UserEntity:
         ...
 
@@ -35,9 +39,14 @@ class UserRepository(AbstractUserRepository):
         user = result.scalar_one_or_none()
         return _to_entity(user) if user else None
 
+    async def get_by_id(self, user_id: int) -> UserEntity | None:
+        result = await self.db.execute(select(User).where(User.id == user_id))
+        user = result.scalar_one_or_none()
+        return _to_entity(user) if user else None
+
     async def add(self, phone: str, password_hash: str) -> UserEntity:
         user = User(phone=phone, password_hash=password_hash)
         self.db.add(user)
-        await self.db.flush()      # получить id, но без коммита
+        await self.db.flush()
         await self.db.refresh(user)
         return _to_entity(user)
