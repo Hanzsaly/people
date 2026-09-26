@@ -1,10 +1,11 @@
 import { useState, FormEvent } from "react";
 import { loginUser, registerUser } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 import "../styles/auth.scss";
-
 type Mode = "login" | "register";
 
 function AuthPage() {
+  const navigate = useNavigate();
   const [mode, setMode] = useState<Mode>("login");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -20,7 +21,7 @@ function AuthPage() {
       if (mode === "login") {
         const data = await loginUser({ phone, password });
         localStorage.setItem("access_token", data.access_token);
-        alert("Вход выполнен!");
+        navigate("/profile");
       } else {
         await registerUser({ phone, password });
         alert("Регистрация успешна! Теперь войдите.");

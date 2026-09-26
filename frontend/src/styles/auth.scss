@@ -3,8 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-
-:root {
+.auth-page {
   --accent-a: #7c93f0;
   --accent-b: #9b8cfb;
   --bg-top: #1e2a4e;
@@ -14,9 +13,6 @@
   --border-glass: rgba(255, 255, 255, 0.2);
   --card-bg: rgba(255, 255, 255, 0.1);
   --error: #f87171;
-}
-
-.auth-page {
   position: relative;
   overflow: hidden;
   min-height: 100vh;
